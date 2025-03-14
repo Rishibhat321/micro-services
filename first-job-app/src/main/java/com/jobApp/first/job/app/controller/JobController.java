@@ -3,10 +3,7 @@ package com.jobApp.first.job.app.controller;
 import com.jobApp.first.job.app.entity.Job;
 import com.jobApp.first.job.app.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +32,10 @@ public class JobController {
         return "Job created successfully";
     }
 
+    @GetMapping("/jobs/{theId}")
+    public Job getJobById(@PathVariable Long theId) {
+        Job job = jobService.getJobById(theId);
+        return job;
+    }
 
 }

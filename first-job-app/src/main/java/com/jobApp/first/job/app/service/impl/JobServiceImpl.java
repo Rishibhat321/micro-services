@@ -25,4 +25,22 @@ public class JobServiceImpl implements JobService {
     //    System.out.println("Job created successfully");
 
     }
+
+    @Override
+    public Job getJobById(Long theId) {
+
+        if(theId >= jobs.size()) {
+            return null;
+        }
+
+        for(Job job: jobs) {
+
+            if(job.getId().equals(theId)) {
+                return job;
+            }
+        }
+
+        return null;
+    }
+
 }
