@@ -12,6 +12,6 @@ public interface JobService {
 
     Job getJobById(Long theId);
 
-    void deleteJobById(Long theId);
+    boolean deleteJobById(Long theId);
 
 }

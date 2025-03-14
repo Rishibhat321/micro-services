@@ -40,13 +40,16 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void deleteJobById(Long theId) {
+    public boolean deleteJobById(Long theId) {
       // get the job by id
         Job job = getJobById(theId);
 
         if(job!=null) {
             jobs.remove(job);
+            return true;
         }
+
+        return false;
     }
 
 }
