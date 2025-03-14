@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+// @RequestMapping("/api")         // BASE URL
 public class JobController {
 
     private JobService jobService;
@@ -48,6 +49,7 @@ public class JobController {
         return new ResponseEntity<>(job, HttpStatus.OK);
     }
 
+ //   @RequestMapping(value = "/jobs/{theId}", method = RequestMethod.DELETE)
     @DeleteMapping("/jobs/{theId}")
     public ResponseEntity<String> deleteJobById(@PathVariable Long theId) {
         boolean deleted = jobService.deleteJobById(theId);
@@ -61,6 +63,7 @@ public class JobController {
 
 
     @PutMapping("/jobs/{theId}")
+ //   @RequestMapping(value = "/jobs/{theId}", method = RequestMethod.PUT)
     public ResponseEntity<String> updateJob(@PathVariable Long theId,
                                             @RequestBody Job updatedJob) {
         boolean updated = jobService.updateJob(theId, updatedJob);
