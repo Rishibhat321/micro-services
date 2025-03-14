@@ -3,6 +3,8 @@ package com.jobApp.first.job.app.controller;
 import com.jobApp.first.job.app.entity.Job;
 import com.jobApp.first.job.app.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,24 +24,35 @@ public class JobController {
     private List<Job> jobs = new ArrayList<>();
 
     @GetMapping("/jobs")
-    public List<Job> findAll() {
-        return jobService.findAll();
+    public ResponseEntity<List<Job>> findAll() {
+     //   return jobService.findAll();
+        return ResponseEntity.ok(jobService.findAll());
     }
 
     @PostMapping("/jobs")
-    public String createJob(@RequestBody Job job) {
+    public ResponseEntity<String> createJob(@RequestBody Job job) {
         jobService.createJob(job);
-        return "Job created successfully";
+    //    return "Job created successfully";
+
+        return new ResponseEntity<>("Job created successfully", HttpStatus.OK);
     }
 
     @GetMapping("/jobs/{theId}")
-    public Job getJobById(@PathVariable Long theId) {
+    public ResponseEntity<Job> getJobById(@PathVariable Long theId) {
         Job job = jobService.getJobById(theId);
 
         if(job==null) {
-            return new Job(1L, "TestJob", "TestJob", "2000", "3000", "loc");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return job;
+
+        return new ResponseEntity<>(job, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/jobs/{theId}")
+    public ResponseEntity<String> deleteJobById(@PathVariable Long theId) {
+        jobService.deleteJobById(theId);
+
+        return new ResponseEntity<>("Job Deleted Successfully", HttpStatus.OK);
     }
 
 }
