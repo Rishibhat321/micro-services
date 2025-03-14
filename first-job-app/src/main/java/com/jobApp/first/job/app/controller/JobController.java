@@ -26,12 +26,12 @@ public class JobController {
 
     @GetMapping("/jobs")
     public List<Job> findAll() {
-        return jobs;
+        return jobService.findAll();
     }
 
     @PostMapping("/jobs")
     public String createJob(@RequestBody Job job) {
-        jobs.add(job);
+        jobService.createJob(job);
         return "Job created successfully";
     }
 
