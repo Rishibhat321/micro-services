@@ -14,4 +14,6 @@ public interface JobService {
 
     boolean deleteJobById(Long theId);
 
+    boolean updateJob(Long theId, Job updatedJob);
+
 }
