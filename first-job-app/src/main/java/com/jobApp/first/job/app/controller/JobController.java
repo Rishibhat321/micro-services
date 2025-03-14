@@ -35,6 +35,10 @@ public class JobController {
     @GetMapping("/jobs/{theId}")
     public Job getJobById(@PathVariable Long theId) {
         Job job = jobService.getJobById(theId);
+
+        if(job==null) {
+            return new Job(1L, "TestJob", "TestJob", "2000", "3000", "loc");
+        }
         return job;
     }
 

@@ -29,10 +29,6 @@ public class JobServiceImpl implements JobService {
     @Override
     public Job getJobById(Long theId) {
 
-        if(theId >= jobs.size()) {
-            return null;
-        }
-
         for(Job job: jobs) {
 
             if(job.getId().equals(theId)) {
