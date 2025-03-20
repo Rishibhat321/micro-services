@@ -4,6 +4,7 @@ import com.jobApp.first.job.app.entity.Job;
 import com.jobApp.first.job.app.repository.JobRepository;
 import com.jobApp.first.job.app.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,13 +17,13 @@ public class JobServiceImpl implements JobService {
  //   private List<Job> jobs = new ArrayList<>();
     // made use oj jpa.
     JobRepository jobRepository;
+    private Long nextId = 1L;
 
     @Autowired
     public JobServiceImpl(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
     }
 
-    private Long nextId = 1L;
 
     @Override
     public List<Job> findAll() {
@@ -31,7 +32,8 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void createJob(Job job) {
-        job.setId(nextId++);
+  //      job.setId(nextId++);
+        job.setId(null);
         jobRepository.save(job);
     //    System.out.println("Job created successfully");
 
@@ -111,6 +113,16 @@ public class JobServiceImpl implements JobService {
             job.setLocation(updatedJob.getLocation());
             jobRepository.save(job);
             return true;
+
+            // for handling StaleObjectStateException
+  /*          try {
+                jobRepository.save(job);
+                return true;
+            } catch (ObjectOptimisticLockingFailureException e) {
+                System.out.println("Optimistic lock conflict, please retry.");
+                return false;
+            }  */
+
         }
 
         return false;

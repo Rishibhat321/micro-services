@@ -15,6 +15,21 @@ public class Job {
     private String maxSalary;
     private String location;
 
+
+    // Adding version for optimistic locking
+  /*  @Version
+    private Long version = 0L;
+
+    // generating getters/setters for version
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }                                                */
+
+
     public Job() {
     }
 
@@ -74,5 +89,7 @@ public class Job {
     public void setTitle(String title) {
         this.title = title;
     }
+
+
 
 }
