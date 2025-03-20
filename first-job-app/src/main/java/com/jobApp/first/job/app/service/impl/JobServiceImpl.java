@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobServiceImpl implements JobService {
 
  //   private List<Job> jobs = new ArrayList<>();
+    // made use oj jpa.
     JobRepository jobRepository;
 
     @Autowired
@@ -48,8 +50,7 @@ public class JobServiceImpl implements JobService {
         return null;  */
 
         // findById returns an optional.
-       return jobRepository.findById(theId).orElseThrow(() -> new RuntimeException("Job id - " + theId + " not found"));
-
+        return jobRepository.findById(theId).orElse(null);
     }
 
     @Override
@@ -67,19 +68,28 @@ public class JobServiceImpl implements JobService {
        */
 
       // get the job by id
-        Job job = getJobById(theId);
+ /*       Job job = getJobById(theId);
 
         if(job!=null) {
             jobs.remove(job);
             return true;
         }
 
-        return false;
+        return false;   */
+
+        try {
+            jobRepository.deleteById(theId);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean updateJob(Long theId, Job updatedJob) {
 
+        Optional<Job> jobOptional = jobRepository.findById(theId);
+        /*
         for(Job job: jobs) {
             if(job.getId().equals(theId)) {
                 job.setTitle(updatedJob.getTitle());
@@ -89,6 +99,18 @@ public class JobServiceImpl implements JobService {
                 job.setLocation(updatedJob.getLocation());
                 return true;
             }
+        }         */
+
+
+        if(jobOptional.isPresent()) {
+            Job job = jobOptional.get();
+            job.setTitle(updatedJob.getTitle());
+            job.setDescription(updatedJob.getDescription());
+            job.setMinSalary(updatedJob.getMinSalary());
+            job.setMaxSalary(updatedJob.getMaxSalary());
+            job.setLocation(updatedJob.getLocation());
+            jobRepository.save(job);
+            return true;
         }
 
         return false;
