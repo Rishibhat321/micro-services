@@ -1,7 +1,9 @@
 package com.jobApp.first.job.app.service.impl;
 
 import com.jobApp.first.job.app.entity.Job;
+import com.jobApp.first.job.app.repository.JobRepository;
 import com.jobApp.first.job.app.service.JobService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,25 +12,32 @@ import java.util.List;
 @Service
 public class JobServiceImpl implements JobService {
 
-    private List<Job> jobs = new ArrayList<>();
+ //   private List<Job> jobs = new ArrayList<>();
+    JobRepository jobRepository;
+
+    @Autowired
+    public JobServiceImpl(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
+
     private Long nextId = 1L;
 
     @Override
     public List<Job> findAll() {
-        return jobs;
+        return jobRepository.findAll();
     }
 
     @Override
     public void createJob(Job job) {
         job.setId(nextId++);
-        jobs.add(job);
+        jobRepository.save(job);
     //    System.out.println("Job created successfully");
 
     }
 
     @Override
     public Job getJobById(Long theId) {
-
+/*
         for(Job job: jobs) {
 
             if(job.getId().equals(theId)) {
@@ -36,7 +45,11 @@ public class JobServiceImpl implements JobService {
             }
         }
 
-        return null;
+        return null;  */
+
+        // findById returns an optional.
+       return jobRepository.findById(theId).orElseThrow(() -> new RuntimeException("Job id - " + theId + " not found"));
+
     }
 
     @Override
