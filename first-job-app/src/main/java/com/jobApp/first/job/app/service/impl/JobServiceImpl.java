@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class JobServiceImpl implements JobService {
 
- //   private List<Job> jobs = new ArrayList<>();
+ //  private List<Job> jobs = new ArrayList<>();
     // made use oj jpa.
     JobRepository jobRepository;
     private Long nextId = 1L;
@@ -32,7 +32,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void createJob(Job job) {
-  //      job.setId(nextId++);
+     //   job.setId(nextId++);
         job.setId(null);
         jobRepository.save(job);
     //    System.out.println("Job created successfully");
@@ -111,6 +111,7 @@ public class JobServiceImpl implements JobService {
             job.setMinSalary(updatedJob.getMinSalary());
             job.setMaxSalary(updatedJob.getMaxSalary());
             job.setLocation(updatedJob.getLocation());
+            // save the changes
             jobRepository.save(job);
             return true;
 
