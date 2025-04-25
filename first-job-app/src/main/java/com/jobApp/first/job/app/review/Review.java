@@ -1,9 +1,8 @@
 package com.jobApp.first.job.app.review;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jobApp.first.job.app.company.Company;
+import jakarta.persistence.*;
 
 @Entity
 public class Review {
@@ -14,6 +13,11 @@ public class Review {
     private String title;
     private String description;
     private double rating;
+
+    // one company will have many reviews
+    @ManyToOne
+    @JsonIgnore
+    private Company company;
 
     public Review() {
     }
@@ -49,4 +53,13 @@ public class Review {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
 }
