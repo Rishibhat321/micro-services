@@ -1,5 +1,6 @@
 package com.jobApp.first.job.app.controller;
 
+import com.jobApp.first.job.app.company.Company;
 import com.jobApp.first.job.app.entity.Job;
 import com.jobApp.first.job.app.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,6 @@ public class JobController {
     public ResponseEntity<String> createJob(@RequestBody Job job) {
         jobService.createJob(job);
         //    return "Job created successfully";
-
         return new ResponseEntity<>("Job created successfully", HttpStatus.OK);
     }
 

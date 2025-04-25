@@ -1,5 +1,6 @@
 package com.jobApp.first.job.app.entity;
 
+import com.jobApp.first.job.app.company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -29,6 +30,10 @@ public class Job {
         this.version = version;
     }                                                */
 
+    // many jobs are linked to one company
+
+    @ManyToOne
+    private Company company;
 
     public Job() {
     }
@@ -91,5 +96,11 @@ public class Job {
     }
 
 
+    public Company getCompany() {
+        return company;
+    }
 
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 }
