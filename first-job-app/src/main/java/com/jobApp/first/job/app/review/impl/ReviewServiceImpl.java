@@ -85,6 +85,7 @@ public class ReviewServiceImpl implements ReviewService {
             Company company = review.getCompany();
             // removing review from company reference  (bidirectional)
             company.getReviews().remove(review);
+            review.setCompany(null);
             companyService.updateCompany(company ,companyId);
             // deleting the review
             reviewRepository.deleteById(reviewId);
