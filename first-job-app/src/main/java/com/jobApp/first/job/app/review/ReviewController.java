@@ -38,6 +38,11 @@ public class ReviewController {
 
     }
 
+    @GetMapping("/reviews/{reviewId}")
+    public ResponseEntity<Review> getReview(@PathVariable Long companyId, @PathVariable Long reviewId) {
+
+    }
+
 
 
 }

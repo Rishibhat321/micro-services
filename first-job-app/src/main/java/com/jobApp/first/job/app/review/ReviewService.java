@@ -8,4 +8,6 @@ public interface ReviewService {
 
     boolean addReview(Long companyId, Review review);
 
+    Review getReview(Long companyId, Long reviewId);
+
 }
