@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
+    // declared as final...
     private final ReviewRepository reviewRepository;
     private final CompanyService companyService;
 
@@ -30,19 +31,20 @@ public class ReviewServiceImpl implements ReviewService {
         return reviews;
     }
 
-    /*
     @Override
-    public void addReview(Long companyId, Review review) {
+    public boolean addReview(Long companyId, Review review) {
+
+        // get the company object
         Company company = companyService.getCompanyBydId(companyId);
 
-        if(company != null) {
+        if(company != null ) {
             review.setCompany(company);
-             reviewRepository.save(review);
+            reviewRepository.save(review);
+            return true;
         }
 
+        return false;
     }
-
-     */
 
 
 }
