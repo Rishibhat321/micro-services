@@ -10,4 +10,6 @@ public interface ReviewService {
 
     Review getReview(Long companyId, Long reviewId);
 
+    void updateReview(Long companyId, Long reviewId, Review review);
+
 }

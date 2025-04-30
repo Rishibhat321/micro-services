@@ -35,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
     public boolean addReview(Long companyId, Review review) {
 
         // get the company object
-        Company company = companyService.getCompanyBydId(companyId);
+        Company company = companyService.getCompanyById(companyId);
 
         if(company != null ) {
             review.setCompany(company);
@@ -57,6 +57,14 @@ public class ReviewServiceImpl implements ReviewService {
                 .filter(review -> review.getId().equals(reviewId))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public void updateReview(Long companyId, Long reviewId, Review review) {
+
+        if(companyService.getCompanyById(companyId) != null) {
+
+        }
     }
 
 
