@@ -6,6 +6,6 @@ public interface ReviewService {
 
     List<Review> getAllReviews(Long companyId);
 
-    void addReview(Long companyId, Review review);
+ //   void addReview(Long companyId, Review review);
 
 }

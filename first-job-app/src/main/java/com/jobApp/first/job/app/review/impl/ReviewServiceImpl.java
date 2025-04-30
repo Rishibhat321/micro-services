@@ -30,6 +30,7 @@ public class ReviewServiceImpl implements ReviewService {
         return reviews;
     }
 
+    /*
     @Override
     public void addReview(Long companyId, Review review) {
         Company company = companyService.getCompanyBydId(companyId);
@@ -40,6 +41,8 @@ public class ReviewServiceImpl implements ReviewService {
         }
 
     }
+
+     */
 
 
 }

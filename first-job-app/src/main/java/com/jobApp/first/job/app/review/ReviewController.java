@@ -24,10 +24,13 @@ public class ReviewController {
         return new ResponseEntity<>(reviewService.getAllReviews(companyId), HttpStatus.OK);
     }
 
+    /*
     @PostMapping("/reviews")
     public void addReview(@PathVariable Long companyId, @RequestBody Review review) {
 
 
     }
+
+     */
 
 }
